@@ -1,0 +1,54 @@
+name: Stock Scraper
+on:
+  schedule:
+    # Cron format: min hour day month weekday (UTC)
+    # Market open ~9:30 AM ET → 14:20 UTC (20 minutes after open)
+    - cron: "20 14 * * 1-5" # Mon-Fri at 14:20 UTC
+  workflow_dispatch: # optional manual trigger
+
+permissions:
+  contents: write # Required for gh-pages deployment
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      # 1️⃣ Checkout the repo
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      # 2️⃣ Setup Docker
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      # 3️⃣ Build Docker image
+      - name: Build Docker Image
+        run: docker build -t stealth-playwright .
+
+      # 4️⃣ Run scraper for multiple tickers
+      - name: Run Scraper
+        run: |
+          docker run --rm stealth-playwright \
+            'BCHG=https://www.grayscale.com/funds/grayscale-bitcoin-cash-trust' \
+            'LTCN=https://www.grayscale.com/funds/grayscale-litecoin-trust' \
+            'GSOL=https://www.grayscale.com/funds/grayscale-solana-trust' \
+            'ZCSH=https://www.grayscale.com/funds/grayscale-zcash-trust' \
+            'GXLM=https://www.grayscale.com/funds/grayscale-stellar-lumens-trust' \
+            'GLNK=https://www.grayscale.com/funds/grayscale-chainlink-trust' \
+            'MANA=https://www.grayscale.com/funds/grayscale-decentraland-trust' \
+            'HZEN=https://www.grayscale.com/funds/grayscale-horizen-trust' \
+            'FILG=https://www.grayscale.com/funds/grayscale-filecoin-trust' \
+            'GLIV=https://www.grayscale.com/funds/grayscale-livepeer-trust' \
+            'GBAT=https://www.grayscale.com/funds/grayscale-basic-attention-token-trust' \
+            'GSNR=https://www.grayscale.com/funds/grayscale-near-trust' \
+            > output.html
+
+      # 5️⃣ Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .
+          publish_branch: gh-pages
+          keep_files: false
+          exclude_assets: ".github,Dockerfile,fetch.py,*.md"
