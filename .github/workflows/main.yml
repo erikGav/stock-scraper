@@ -28,7 +28,11 @@ jobs:
       # 4️⃣ Run scraper for multiple tickers
       - name: Run Scraper
         run: |
-          docker run --rm stealth-playwright \
+          docker run --rm \
+            --memory="2g" \
+            --cpus="2" \
+            --shm-size="1g" \
+            stealth-playwright \
             'BCHG=https://www.grayscale.com/funds/grayscale-bitcoin-cash-trust' \
             'LTCN=https://www.grayscale.com/funds/grayscale-litecoin-trust' \
             'GSOL=https://www.grayscale.com/funds/grayscale-solana-trust' \
