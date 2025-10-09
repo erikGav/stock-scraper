@@ -2,8 +2,7 @@ name: Stock Scraper
 on:
   schedule:
     # Cron format: min hour day month weekday (UTC)
-    # Market open ~9:30 AM ET → 14:20 UTC (20 minutes after open)
-    - cron: "20 14 * * 1-5" # Mon-Fri at 14:20 UTC
+    - cron: "0 14 * * 1-5" # Mon-Fri at 14:00 UTC
   workflow_dispatch: # optional manual trigger
 
 permissions:
