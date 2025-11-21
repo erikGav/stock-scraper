@@ -34,7 +34,6 @@ jobs:
             stealth-playwright \
             'BCHG=https://www.grayscale.com/funds/grayscale-bitcoin-cash-trust' \
             'LTCN=https://www.grayscale.com/funds/grayscale-litecoin-trust' \
-            'GSOL=https://www.grayscale.com/funds/grayscale-solana-trust' \
             'ZCSH=https://www.grayscale.com/funds/grayscale-zcash-trust' \
             'GXLM=https://www.grayscale.com/funds/grayscale-stellar-lumens-trust' \
             'GLNK=https://www.grayscale.com/funds/grayscale-chainlink-trust' \
