@@ -36,7 +36,6 @@ jobs:
             'LTCN=https://www.grayscale.com/funds/grayscale-litecoin-trust' \
             'ZCSH=https://www.grayscale.com/funds/grayscale-zcash-trust' \
             'GXLM=https://www.grayscale.com/funds/grayscale-stellar-lumens-trust' \
-            'GLNK=https://www.grayscale.com/funds/grayscale-chainlink-trust' \
             'MANA=https://www.grayscale.com/funds/grayscale-decentraland-trust' \
             'HZEN=https://www.grayscale.com/funds/grayscale-horizen-trust' \
             'FILG=https://www.grayscale.com/funds/grayscale-filecoin-trust' \
