@@ -168,7 +168,8 @@ def main():
                     continue
                 ticker, url = arg.split('=', 1)
                 value = scrape_page(browser, url, ticker)
-                print(f'<div id="{ticker}">{value}</div>')
+                # Changed this line to include ticker in the visible text
+                print(f'<div id="{ticker}">{ticker}: {value}</div>')
 
             print("</body></html>")
 
